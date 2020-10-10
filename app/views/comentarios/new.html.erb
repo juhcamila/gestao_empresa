@@ -1,0 +1,24 @@
+<%= form_with(model: [@post, @comentario], local: true) do |form| %>
+  <h2>Comentar</h2>
+  <% if @comentario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comentario.errors.count, "erros") %> <br/> Verifique os erros abaixo:</h2>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group has-error">
+    <%= form.label 'Descrição' %>
+    <%= form.text_field :descricao, class: 'form-control', required: true  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Salvar', class: "btn btn-danger btn-lg btn-block" %>
+  </div>
+<% end %>
+

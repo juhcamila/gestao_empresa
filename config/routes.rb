@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :posts, only: [:index, :new, :create, :show] do
+    resources :comentarios, only: [:new, :create]
+  end
+
   resources :clientes
   resources :funcionarios
   devise_for :users, :skip => [:registrations] , controllers: {

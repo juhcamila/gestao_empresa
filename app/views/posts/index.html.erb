@@ -1,0 +1,19 @@
+<%= link_to 'Postar Algo', new_post_path %>
+<% @posts.each do |post| %>
+  <div class="row">
+    <div class="card" style="width: 100%; margin-top: 10px;">
+      <div class="card-header">
+        <%= post.assunto %>
+        <%= link_to 'Visualizar', post, class: "float-right" %>
+        <%= link_to 'Comentar', new_post_comentario_path(post), class: "float-right", style: 'margin-right: 10px;' %>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p><%= post.descricao %></p>
+          <footer class="blockquote-footer"><%= post.user.username %> <cite title="Título da fonte"><%= date(post.created_at)%> - <%= post.comentarios.size %> comentários</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+<% end %>
+

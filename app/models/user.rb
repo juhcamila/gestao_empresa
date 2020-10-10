@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: {message: "já cadastrado"}
   validates :username, length: {maximum: 15, message: "ultrapassou limite de caracteres"},uniqueness: {message: "já cadastrado"}
   validates :password, length: {in: 6..12, message: "Deve ter de 6 a 12 caracteres"}
+
+  belongs_to :cliente, class_name: "Cliente", foreign_key: "clientes_id"
 end

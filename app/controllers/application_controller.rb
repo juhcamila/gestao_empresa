@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def user_manager?
    if request.controller_class == ClientesController || request.controller_class == FuncionariosController
      unless current_user.manager
-       redirect_to root
+       redirect_to posts_path
      end
    end
   end
