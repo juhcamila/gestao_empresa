@@ -25,6 +25,7 @@
         <li class="sidebar-brand"> <a href="#"> Gestão Empresa </a> </li>
         <% if current_user.manager %>
           <li> <%= link_to 'Funcionários', funcionarios_path %></li>
+          <li> <%= link_to 'Editar Dados do Cliente', edit_cliente_path(Cliente.find(current_user.clientes_id)) %></li>
         <% end %>
         <li> <%= link_to 'Postagens', posts_path %></li>
         <li><%= link_to "Sair", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>

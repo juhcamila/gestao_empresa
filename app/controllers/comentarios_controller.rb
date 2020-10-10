@@ -2,6 +2,7 @@ class ComentariosController < ApplicationController
   before_action :set_post, only: [:new, :create]
   before_action :set_user, only: [:new, :create]
   before_action :set_cliente, only: [:new, :create]
+  before_action :permit?, only: [:new, :create]
 
   # GET /comentarios/new
   def new
@@ -18,7 +19,7 @@ class ComentariosController < ApplicationController
 
     respond_to do |format|
       if @comentario.save
-        format.html { redirect_to @post, notice: 'Comentárioadicionado com sucesso' }
+        format.html { redirect_to @post, notice: 'Comentário adicionado com sucesso' }
         format.json { render :show, status: :created, location: @comentario }
       else
         format.html { render :new }
@@ -39,6 +40,12 @@ class ComentariosController < ApplicationController
 
     def set_cliente
       @cliente = current_user.clientes_id
+    end
+
+    def permit?
+      if @post.cliente_id != @cliente
+        redirect_to posts_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

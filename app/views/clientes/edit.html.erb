@@ -27,17 +27,7 @@
     <%= form.text_field :descricao, class: 'form-control', required: true  %>
   </div>
 
-  <div class="form-group has-error">
-    <%= form.label 'Usuário' %>
-    <%= form.text_field :usuario, class: 'form-control', required: true  %>
-  </div>
-
-  <div class="form-group has-error">
-    <%= form.label 'Senha' %>
-    <%= form.password_field :senha, autocomplete: "current-password", class: "form-control", required: true  %>
-  </div>
-
   <div class="actions">
-    <%= form.submit 'Salvar', class: "btn btn-secondary btn-lg btn-block" %>
+    <%= form.submit 'Salvar', class: "btn btn-danger btn-lg btn-block" %>
   </div>
 <% end %>

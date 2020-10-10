@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(version: 2020_10_10_180808) do
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "descricao"
     t.string "assunto"
-    t.bigint "clientes_id", null: false
-    t.bigint "users_id", null: false
+    t.bigint "cliente_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["clientes_id"], name: "index_posts_on_clientes_id"
-    t.index ["users_id"], name: "index_posts_on_users_id"
+    t.index ["cliente_id"], name: "index_posts_on_cliente_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_180808) do
   add_foreign_key "comentarios", "clientes"
   add_foreign_key "comentarios", "posts"
   add_foreign_key "comentarios", "users"
-  add_foreign_key "posts", "clientes", column: "clientes_id"
-  add_foreign_key "posts", "users", column: "users_id"
+  add_foreign_key "posts", "clientes"
+  add_foreign_key "posts", "users"
   add_foreign_key "users", "clientes", column: "clientes_id"
 end

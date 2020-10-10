@@ -1,7 +1,9 @@
 class FuncionariosController < ApplicationController
   respond_to :html
   before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :set_cliente, only: [:index, :new, :create]
+  before_action :set_cliente, only: [:index, :new, :create, :edit, :update]
+  before_action :permit?, only: [:new, :create, :index]
+  before_action :permit_edit?, only: [:edit, :update]
 
   def index
     @users = User.where(clientes_id: @cliente, manager: false)
@@ -57,6 +59,18 @@ class FuncionariosController < ApplicationController
 
   def set_cliente
     @cliente = current_user.clientes_id
+  end
+
+  def permit?
+    if @cliente != current_user.clientes_id
+      redirect_to funcionarios_path
+    end
+  end
+
+  def permit_edit?
+    if @user.clientes_id != current_user.clientes_id
+      redirect_to funcionarios_path
+    end
   end
 
   def funcionario_params

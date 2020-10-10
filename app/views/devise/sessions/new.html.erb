@@ -4,12 +4,14 @@
     <div class="form-group has-error">
       <%= f.label 'Usuário' %><br />
       <%= f.text_field :username, autofocus: true, class: "form-control", required: true %>
-      <% flash.each do  %>
+      <% flash.each do |_key, value| %>
+        <% if value == 'Invalid Username or password.' %>
           <div class="flash text-danger">Usuário ou senha inválida</div>
         <% end %>
-      </div>
+      <% end %>
+    </div>
 
-      <div class="form-group has-error">
+    <div class="form-group has-error">
       <%= f.label 'Senha' %><br />
       <%= f.password_field :password, autocomplete: "current-password", class: "form-control", required: true %>
     </div>
