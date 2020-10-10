@@ -1,0 +1,23 @@
+<%= link_to 'Novo usuário', new_funcionario_path %>
+<div class="table-responsive-md">
+  <table class="table">
+    <h2>Lista de usuários</h2>
+    <thead>
+      <tr>
+        <th colspan="2">Ações</th>
+        <th scope="col">Email</th>
+        <th scope="col">Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td class="text-right"><%= link_to 'Alterar', edit_funcionario_path(user) %></td>
+        <td class="text-right"><%= link_to 'Excluir', funcionario_path(user), method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+        <td class="text-right"><%= user.email %></td>
+        <td class="text-right"><%= user.username %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

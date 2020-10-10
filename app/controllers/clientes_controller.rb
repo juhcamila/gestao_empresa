@@ -1,5 +1,6 @@
 class ClientesController < ApplicationController
   before_action :set_cliente, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
 
   # GET /clientes
   # GET /clientes.json
@@ -29,7 +30,14 @@ class ClientesController < ApplicationController
 
     respond_to do |format|
       if @cliente.save
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully created.' }
+
+        user = User.create(
+            email: cliente_params["email"], username: cliente_params["usuario"],
+            clientes_id: @cliente.id, manager: true, password: cliente_params["senha"]
+        )
+
+        sign_in(user, scope: :user)
+        format.html { redirect_to @cliente, notice: 'Cliente criado com sucesso' }
         format.json { render :show, status: :created, location: @cliente }
       else
         format.html { render :new }
@@ -43,7 +51,7 @@ class ClientesController < ApplicationController
   def update
     respond_to do |format|
       if @cliente.update(cliente_params)
-        format.html { redirect_to @cliente, notice: 'Cliente was successfully updated.' }
+        format.html { redirect_to @cliente, notice: 'Cliente alterado com sucesso' }
         format.json { render :show, status: :ok, location: @cliente }
       else
         format.html { render :edit }
@@ -70,6 +78,6 @@ class ClientesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cliente_params
-      params.require(:cliente).permit(:nome, :email, :descricao)
+      params.require(:cliente).permit(:nome, :email, :descricao, :usuario, :senha)
     end
 end

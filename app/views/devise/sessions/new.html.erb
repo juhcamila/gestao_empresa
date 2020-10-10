@@ -2,16 +2,16 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <h2>Login</h2>
     <div class="form-group has-error">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-        <% flash.each do  %>
-          <div class="flash text-danger">Email ou senha inválida</div>
+      <%= f.label 'Usuário' %><br />
+      <%= f.text_field :username, autofocus: true, class: "form-control", required: true %>
+      <% flash.each do  %>
+          <div class="flash text-danger">Usuário ou senha inválida</div>
         <% end %>
       </div>
 
       <div class="form-group has-error">
       <%= f.label 'Senha' %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control", required: true %>
     </div>
 
     <% if devise_mapping.rememberable? %>
@@ -22,9 +22,11 @@
     <% end %>
 
       <div class="form-actions">
-      <%= f.submit "Logar", class: "btn btn-primary btn-lg btn-block" %>
+      <%= f.submit "Logar", class: "btn btn-danger btn-lg btn-block" %>
     </div>
 
+    <%= link_to 'Não tem conta? cadastre sua empresa!', new_cliente_path %>
     <%= render "devise/shared/links" %>
+
   <% end %>
 </div>

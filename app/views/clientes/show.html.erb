@@ -14,6 +14,6 @@
   <strong>Descricao:</strong>
   <%= @cliente.descricao %>
 </p>
-
+<%= current_user.id %>
 <%= link_to 'Edit', edit_cliente_path(@cliente) %> |
 <%= link_to 'Back', clientes_path %>

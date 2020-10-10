@@ -1,5 +1,45 @@
-<h1>New Cliente</h1>
+<div class="login-form">
+  <%= form_with(model: @cliente, local: true) do |form| %>
+    <h2>Cadastrar Cliente</h2>
+    <% if @cliente.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@cliente.errors.count, "erros") %> <br/> Verifique os erros abaixo:</h2>
 
-<%= render 'form', cliente: @cliente %>
+        <ul>
+          <% @cliente.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= link_to 'Back', clientes_path %>
+    <div class="form-group has-error">
+      <%= form.label :nome %>
+      <%= form.text_field :nome, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="form-group has-error">
+      <%= form.label :email %>
+      <%= form.email_field :email, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="form-group has-error">
+      <%= form.label 'Descrição da empresa' %>
+      <%= form.text_field :descricao, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="form-group has-error">
+      <%= form.label 'Usuário' %>
+      <%= form.text_field :usuario, class: 'form-control', required: true  %>
+    </div>
+
+    <div class="form-group has-error">
+      <%= form.label 'Senha' %>
+      <%= form.password_field :senha, autocomplete: "current-password", class: "form-control", required: true  %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Salvar', class: "btn btn-secondary btn-lg btn-block" %>
+    </div>
+  <% end %>
+</div>
