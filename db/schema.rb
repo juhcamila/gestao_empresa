@@ -31,9 +31,12 @@ ActiveRecord::Schema.define(version: 2020_10_09_214147) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
+    t.bigint "clientes_id", null: false
     t.boolean "manager"
+    t.index ["clientes_id"], name: "index_users_on_clientes_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "users", "clientes", column: "clientes_id"
 end
