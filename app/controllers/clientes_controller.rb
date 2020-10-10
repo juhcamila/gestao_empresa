@@ -15,6 +15,7 @@ class ClientesController < ApplicationController
   # GET /clientes/new
   def new
     @cliente = Cliente.new
+    render layout: 'login'
   end
 
   # GET /clientes/1/edit
